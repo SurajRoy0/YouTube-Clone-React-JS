@@ -26,7 +26,7 @@ const LeftNav = () => {
       <div className="flex px-5 flex-col">
         {categories.map((item) => {
           return (
-            <>
+            <React.Fragment key={item.id}>
               <LeftNavMenuItem
                 text={item.type === "home" ? "Home" : item.name}
                 icon={item.icon}
@@ -39,7 +39,7 @@ const LeftNav = () => {
                 }`}
               />
               {item.divider && <hr className="my-5 border-white/[0.2]" />}
-            </>
+            </React.Fragment>
           );
         })}
         <hr className="my-5 border-white/[0.2]" />
