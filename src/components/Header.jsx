@@ -61,7 +61,11 @@ const Header = () => {
             src={ytLogo}
             alt="Youtube"
           />
-          <img className="h-full md:hidden" src={ytLogoMobile} alt="Youtube" />
+          <img
+            className="h-full md:hidden"
+            src={ytLogoMobile}
+            alt="Youtube-mobile"
+          />
         </Link>
       </div>
       <div className="group flex items-center">
@@ -97,7 +101,7 @@ const Header = () => {
         <div className="flex h-8 w-8 overflow-hidden rounded-full md:ml-4">
           <img
             src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg"
-            alt="profile-photo"
+            alt="profile"
           />
         </div>
       </div>

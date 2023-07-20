@@ -13,6 +13,7 @@ const SearchResultVideoCard = ({ video }) => {
           <img
             className="h-full w-full object-cover"
             src={video?.thumbnails[0]?.url}
+            alt={video?.title}
           />
           {video.lengthSeconds && <VideoLength time={video?.lengthSeconds} />}
         </div>
@@ -30,7 +31,7 @@ const SearchResultVideoCard = ({ video }) => {
                 <img
                   className="h-full w-full object-cover"
                   src={video?.author?.avatar[0]?.url}
-                  alt=""
+                  alt={video?.title}
                 />
               </div>
             </div>
