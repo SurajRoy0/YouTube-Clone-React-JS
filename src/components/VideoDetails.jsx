@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import { AiOutlineLike } from "react-icons/ai";
+import { IoEyeOutline } from "react-icons/io5";
 import { abbreviateNumber } from "js-abbreviation-number";
 
 import { fetchDataFromApi } from "../utils/api";
@@ -24,7 +25,6 @@ const VideoDetails = () => {
   const fetchVideoDetails = async () => {
     setLoading(true);
     const data = await fetchDataFromApi(`video/details/?id=${id}`);
-    console.log(data);
     setVideo(data);
     setLoading(false);
   };
@@ -32,7 +32,6 @@ const VideoDetails = () => {
   const fetchRelatedVideos = async () => {
     setLoading(true);
     const data = await fetchDataFromApi(`video/related-contents/?id=${id}`);
-    console.log(data);
     setRelatedVideos(data);
     setLoading(false);
   };
@@ -48,6 +47,7 @@ const VideoDetails = () => {
               width="100%"
               height="100%"
               style={{ backgroundColor: "#000000" }}
+              playing={true}
             />
           </div>
           <div className="text-white font-bold text-sm md:text-xl mt-4 pb-4 line-clamp-2">
@@ -77,15 +77,15 @@ const VideoDetails = () => {
               </div>
             </div>
             <div className="flex text-white mt-4 md:mt-0">
-              <div className="flex items-center justify-center h-11 px-6 rounded-3xl bg-white/[0.15]">
-                <AiOutlineLike className="text-xl text-white mr-2" />
+              <div className="flex text-sm items-center justify-center h-11 px-6 rounded-3xl bg-white/[0.15]">
+                <AiOutlineLike className="text-[18px] text-white mr-2" />
                 <span>{`${abbreviateNumber(
                   video?.stats?.likes,
                   2
                 )} Likes`}</span>
               </div>
-              <div className="flex items-center justify-center h-11 px-6 rounded-3xl bg-white/[0.15] ml-4">
-                <AiOutlineLike className="text-xl text-white mr-2" />
+              <div className="flex text-sm items-center justify-center h-11 px-6 rounded-3xl bg-white/[0.15] ml-4">
+                <IoEyeOutline className="text-[18px] text-white mr-2" />
                 <span>{`${abbreviateNumber(
                   video?.stats?.views,
                   2
@@ -95,7 +95,7 @@ const VideoDetails = () => {
           </div>
         </div>
 
-        <div className="flex flex-col py-6 px-4 overflow-y-auto lg:w-[350px] xl:w-[400px]">
+        <div className="flex flex-col py-6 px-4 customScroll overflow-y-auto lg:w-[350px] xl:w-[400px]">
           {relatedVideos?.contents?.map((item, index) => {
             if (item.type !== "video") return false;
             return <SuggestionVideoCard key={index} video={item.video} />;

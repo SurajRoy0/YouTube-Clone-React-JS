@@ -6,7 +6,7 @@ import { categories } from "../utils/constant";
 import { AppContext } from "../context/contextApi";
 
 const LeftNav = () => {
-  const { selectedCategory, setSelectedCategory, mobileMenu } =
+  const { selectedCategory, setSelectedCategory, mobileMenu, setMobileMenu } =
     useContext(AppContext);
   const navigate = useNavigate();
   const clickHandler = (name, type) => {
@@ -22,8 +22,12 @@ const LeftNav = () => {
     }
   };
   return (
-    <div className="md:block w-[240px] overflow-auto h-full py-4 bg-black absolute md:relative z-10 translate-x-[-240px] md:translate-x-0 transition-all">
-      <div className="flex px-5 flex-col">
+    <div
+      className={`${
+        mobileMenu ? "translate-x-0 " : "translate-x-[-240px]"
+      } customScroll md:block w-[240px] overflow-auto h-full py-4 bg-black absolute md:relative z-10  md:translate-x-0 transition-all`}
+    >
+      <div className="flex px-5 flex-col ">
         {categories.map((item) => {
           return (
             <React.Fragment key={item.id}>
@@ -33,6 +37,7 @@ const LeftNav = () => {
                 action={() => {
                   clickHandler(item.name, item.type);
                   navigate("/");
+                  setMobileMenu(false);
                 }}
                 className={`${
                   selectedCategory === item.name ? "bg-white/[0.15]" : ""

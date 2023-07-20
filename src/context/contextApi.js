@@ -7,17 +7,21 @@ const AppContextProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [searchResult, setSearchResult] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState(null);
-    const [mobileMenu, setMobileMenu] = useState(null);
+    const [mobileMenu, setMobileMenu] = useState(false);
 
     useEffect(() => {
         fetchSelectedCategoryData(selectedCategory);
     }, [selectedCategory]);
 
+    useEffect(() => {
+        console.log(searchResult)
+    }, [searchResult]);
+
+
     const fetchSelectedCategoryData = async (query) => {
         setLoading(true);
         try {
             const { contents } = await fetchDataFromApi(`search/?q=${query}`);
-            console.log(contents);
             setSearchResult(contents);
         } catch (error) {
             console.log(error);

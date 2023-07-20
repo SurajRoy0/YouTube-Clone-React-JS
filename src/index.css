@@ -74,3 +74,20 @@ code {
     height: 100vh !important;
   }
 }
+
+.customScroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.customScroll::-webkit-scrollbar-track {
+  background-color: #000000;
+}
+
+.customScroll::-webkit-scrollbar-thumb {
+  background-color: #525352;
+  border-radius: 5px;
+}
+
+.customScroll::-webkit-scrollbar-thumb:hover {
+  background-color: #1f1e1e;
+}
