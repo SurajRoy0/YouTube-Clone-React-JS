@@ -13,6 +13,7 @@ const VideoCard = ({ video }) => {
           <img
             className="h-full w-full object-cover"
             src={video?.thumbnails[0]?.url}
+            alt="thumbnail"
           />
           {video.lengthSeconds && <VideoLength time={video?.lengthSeconds} />}
         </div>

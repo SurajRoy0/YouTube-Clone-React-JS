@@ -9,6 +9,7 @@ import { abbreviateNumber } from "js-abbreviation-number";
 import { fetchDataFromApi } from "../utils/api";
 import { AppContext } from "../context/contextApi";
 import SuggestionVideoCard from "./SuggestionVideoCard";
+import { useCallback } from "react";
 
 const VideoDetails = () => {
   const [video, setVideo] = useState({});
@@ -16,25 +17,25 @@ const VideoDetails = () => {
   const { id } = useParams();
   const { setLoading } = useContext(AppContext);
 
-  useEffect(() => {
-    document.getElementById("root").classList.add("custom-h");
-    fetchVideoDetails();
-    fetchRelatedVideos();
-  }, [id]);
-
-  const fetchVideoDetails = async () => {
+  const fetchVideoDetails = useCallback(async () => {
     setLoading(true);
     const data = await fetchDataFromApi(`video/details/?id=${id}`);
     setVideo(data);
     setLoading(false);
-  };
+  }, [id, setLoading]);
 
-  const fetchRelatedVideos = async () => {
+  const fetchRelatedVideos = useCallback(async () => {
     setLoading(true);
     const data = await fetchDataFromApi(`video/related-contents/?id=${id}`);
     setRelatedVideos(data);
     setLoading(false);
-  };
+  }, [id, setLoading]);
+
+  useEffect(() => {
+    document.getElementById("root").classList.add("custom-h");
+    fetchVideoDetails();
+    fetchRelatedVideos();
+  }, [id, fetchVideoDetails, fetchRelatedVideos]);
 
   return (
     <div className="flex flex-row justify-center h-[calc(100%-56px)] bg-black">
